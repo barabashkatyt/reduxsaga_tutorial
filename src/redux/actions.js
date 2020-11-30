@@ -1,6 +1,7 @@
 import {
   CREATE_POST,
   FETCH_POST,
+  REQUEST_POSTS,
   HIDE_ALERT,
   HIDE_LOADER,
   SHOW_ALERT,
@@ -42,20 +43,21 @@ export function hideAlert() {
 }
 
 export function fetchPosts() {
-  return async (dispatch) => {
-    try {
-      dispatch(showLoader());
-      const responce = await fetch(
-        "https://jsonplaceholder.typicode.com/posts?_limit=5"
-      );
-      const json = await responce.json();
-      setTimeout(() => {
-        dispatch({ type: FETCH_POST, payload: json });
-        dispatch(hideLoader());
-      }, 2000);
-    } catch (e) {
-      dispatch(showAlert("Smthing went wrong"));
-      dispatch(hideLoader());
-    }
-  };
+  return { type: REQUEST_POSTS };
+  // return async (dispatch) => {
+  //   try {
+  //     dispatch(showLoader());
+  //     const responce = await fetch(
+  //       "https://jsonplaceholder.typicode.com/posts?_limit=5"
+  //     );
+  //     const json = await responce.json();
+  //     setTimeout(() => {
+  //       dispatch({ type: FETCH_POST, payload: json });
+  //       dispatch(hideLoader());
+  //     }, 2000);
+  //   } catch (e) {
+  //     dispatch(showAlert("Smthing went wrong"));
+  //     dispatch(hideLoader());
+  //   }
+  // };
 }
